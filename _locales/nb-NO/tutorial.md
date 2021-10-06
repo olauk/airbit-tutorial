@@ -151,7 +151,7 @@ input.onButtonPressed(Button.B, function () {
 
 ## Steg 15
 
-Når vi trykker knapp A vil vi minske farten på rotorene. Derfor endrer vi verdien i ``||variables:endre Throttle med||`` fra 5 til -5 og ``||variables:endre Throttle med||` fra 1 til - 1 som står i ``||input:Når knapp A trykkes||``
+Når vi trykker knapp A vil vi minske farten på rotorene. I ``||input:Når knapp A trykkes||`` endrer vi derfor verdien i ``||variables:endre Throttle med||`` fra 5 til -5 og ``||variables:endre Throttle med||`` fra 1 til - 1.
 ```blocks
 input.onButtonPressed(Button.A, function () { 
     if (Throttle < 40) {
@@ -159,5 +159,71 @@ input.onButtonPressed(Button.A, function () {
     } else {
     Throttle += -1	
     }
+})
+```
+
+## Steg 16
+
+For å armere dronen skal vi trykke A og B knappene samtidig. Hent inn ``||input:Når knapp A trykkes||`` og endre den til ``||input:Når knapp A+B trykkes||``.
+
+```blocks
+input.onButtonPressed(Button.AB, function () {
+	
+})
+```
+
+## Steg 17
+
+Lag en ny variabel som du kaller "Arm"
+
+## Steg 18
+
+Hent blokken ``||logic:Hvis <sann> - så ellers||`` fra ``||logikk||`` og plasser den i ``||input:Når knapp A+B trykkes||``
+```blocks
+input.onButtonPressed(Button.AB, function () {
+	if (true) {
+    	
+    } else {
+    }
+})
+```
+
+
+## Steg 19
+
+Hent den runde blokken ``||variables:Arm||`` fra ``||variables:variabler||`` og plasser den der det står "sann" i ``||logic:Hvis <sann> - så||``
+```blocks
+input.onButtonPressed(Button.AB, function () {
+	if (Arm) {
+    	
+    } else {
+    }
+})
+```
+
+## Steg 20
+
+Hent inn en ``||variables:sett Arm til||`` og plasser den under ``||logic:Hvis Arm så||``. Sett ``||variables:sett Arm til||`` til 0. Hent inn en ny ``||variables:sett Arm til||``, plasser den under ``||logic:ellers||`` og sett den til 1.
+```blocks
+input.onButtonPressed(Button.AB, function () {
+	if (Arm) {
+    	Arm = 0
+    } else {
+        Arm = 1
+    }
+})
+```
+
+## Steg 21
+
+Når vi trykke A + B vil vi også at Throttle skal settes til 0. Hent derfor inn ``||variables:sett Throttle til||`` og plasser den under ``||logic:Hvis <sann> - så ellers||`` i ``||input:Når knapp A+B trykkes||``
+```blocks
+input.onButtonPressed(Button.AB, function () {
+	if (Arm) {
+    	Arm = 0
+    } else {
+        Arm = 1
+    }
+    Throttle = 0
 })
 ```
