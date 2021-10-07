@@ -3,7 +3,7 @@
 
 ## Tutorials
 
-* [tutorial](/tutorial)
+* [tutorial](airbit-tutorial/tutorial)
 
 ## Rediger dette prosjektet ![Bygg statusmerke](https://github.com/olauk/airbit-tutorial/workflows/MakeCode/badge.svg)
 
