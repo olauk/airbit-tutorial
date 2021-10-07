@@ -135,7 +135,7 @@ input.onButtonPressed(Button.B, function () {
 ```
 ### Steg 12
 
-Flytt blokken ``||variables:endre Throttle med 5||`` til den første åpningen i blokken ``||logic:Hvis <sann> så - ellers||`` 
+Flytt blokken ``||variables:endre Throttle med 5||`` til den første åpningen i blokken ``||logic:Hvis <sann> så - ellers||``   
 TIPS: Hold inne CTRL tasten for å flytte en blokk midt i koden.
 ```blocks
 input.onButtonPressed(Button.B, function () {
