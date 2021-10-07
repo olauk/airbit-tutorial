@@ -250,7 +250,7 @@ Vi skal da hente blokken ``||logic:Hvis <sann> - så||`` og sette den inn i ``||
 basic.forever(function () {
     Pitch = input.rotation(Rotation.Pitch)
     Roll = input.rotation(Rotation.Roll)
-    if () {
+    if (true) {
     }
 })
 ```
@@ -284,7 +284,16 @@ basic.forever(function () {
 ## Steg 26
 
 Hent blokken ``||basic:tøm skjerm||`` og plasser den under ``||variables:sett Roll til||`` i ``||basic:gjenta for alltid||``
-
+```blocks
+basic.forever(function () {
+    Pitch = input.rotation(Rotation.Pitch)
+    Roll = input.rotation(Rotation.Roll)
+    basic.clearScreen()
+    if (Arm) {
+        led.plot(0, 0)
+    }
+})
+```
 ## Steg 27
 
 Hent en ny ``||led:tenn x <0> y <0>||`` og plasser den nederst i ``||basic:gjenta for alltid||``. 
@@ -294,6 +303,7 @@ Hent ``||math:regn om <0> fra lav <0> til høy <1023> til lav <0> til høy <4>||
 basic.forever(function () {
     Pitch = input.rotation(Rotation.Pitch)
     Roll = input.rotation(Rotation.Roll)
+    basic.clearScreen()
     if (Arm) {
         led.plot(0, 0)
     }
@@ -309,6 +319,7 @@ Endre tallene i "regn om" blokken slik at det står ``||led:tenn x (0) y (regn o
 basic.forever(function () {
     Pitch = input.rotation(Rotation.Pitch)
     Roll = input.rotation(Rotation.Roll)
+    basic.clearScreen()
     if (Arm) {
         led.plot(0, 0)
     }
@@ -323,6 +334,7 @@ Hent en ny ``||led:tenn x <0> y <0>||`` og plasser den nederst i ``||basic:gjent
 basic.forever(function () {
     Pitch = input.rotation(Rotation.Pitch)
     Roll = input.rotation(Rotation.Roll)
+    basic.clearScreen()
     if (Arm) {
         led.plot(0, 0)
     }
@@ -338,6 +350,7 @@ Hent inn ``||math:regn om <0> fra lav <0> til høy <1023> til lav <0> til høy <
 basic.forever(function () {
     Pitch = input.rotation(Rotation.Pitch)
     Roll = input.rotation(Rotation.Roll)
+    basic.clearScreen()
     if (Arm) {
         led.plot(0, 0)
     }
@@ -347,3 +360,49 @@ basic.forever(function () {
 ```
 
 ## Steg 31
+
+Hent en rund ``||variables:Roll||`` blokk og plasser den først i "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||`` ``||led:fra lav <0> fra høy <1023> til lav <0> til høy<4>) y(0)||``
+Endre tallene i "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||`` ``||led:fra lav <-45> fra høy <45> til lav <0> til høy<0>) y(0)||``
+```blocks
+basic.forever(function () {
+    Pitch = input.rotation(Rotation.Pitch)
+    Roll = input.rotation(Rotation.Roll)
+    basic.clearScreen()
+    if (Arm) {
+        led.plot(0, 0)
+    }
+    led.plot(0, Math.map(Throttle, 0, 100, 4, 0))
+    led.plot(Math.map(Roll,-45,45,0,4),0)
+    })
+```
+## Steg 32
+
+Hent inn ``||math:regn om <0> fra lav <0> til høy <1023> til lav <0> til høy <4>||`` og plasser den i ``||led:tenn x <0> y <0>||`` slik at det står: ``||led:tenn x <regn om Roll ..> y<regn om ..>||`` 
+```blocks
+basic.forever(function () {
+    Pitch = input.rotation(Rotation.Pitch)
+    Roll = input.rotation(Rotation.Roll)
+    basic.clearScreen()
+    if (Arm) {
+        led.plot(0, 0)
+    }
+    led.plot(0, Math.map(Throttle, 0, 100, 4, 0))
+    led.plot(Math.map(Roll,-45,45,0,4),Math.map(0,0,1023,0,4))
+    })
+```
+
+## Steg 33
+Hent en rund ``||variables:Pitch||`` blokk og plasser den først i den siste "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||`` ``||led:fra lav <0> fra høy <1023> til lav <0> til høy<4>) y(regn om ||`` ``||variables:Pitch||`` ``||led:fra lav <0> fra høy <1023> til lav <0> til høy<4>)||``
+Endre tallene i "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||`` ``||led:.. ) y(regn om ``||variables:Pitch||`` ``||led:fra lav <-45> fra høy <45> til lav <0> til høy<4>))||``
+```blocks
+basic.forever(function () {
+    Pitch = input.rotation(Rotation.Pitch)
+    Roll = input.rotation(Rotation.Roll)
+    basic.clearScreen()
+    if (Arm) {
+        led.plot(0, 0)
+    }
+    led.plot(0, Math.map(Throttle, 0, 100, 4, 0))
+    led.plot(Math.map(Roll,-45,45,0,4),Math.map(Pitch,-45,45,0,4))
+    })
+```
