@@ -274,8 +274,13 @@ input.onGesture(Gesture.Shake, function () {
     Throttle = 0
 })
 ```
+## Skjerm
 
-### Steg 23
+### Programmere skjermen på fjernkontrollen @unplugged
+Vi skal nå programmere skjermen på fjernkontrollen slik at vi ser verdien for Throttle, Pitch, Roll og om dronen er på eller ikke (Arm)
+![Skjerm](https://github.com/olauk/static/blob/master/Skjerm.png?raw=true)
+
+### Steg 1
 
 For å vise om dronen er på eller av skal vi bruker skjermen. Først må vi undersøke om Arm = 1 (drone på) eller om Arm = 0 (drone av).
 Vi skal da hente blokken ``||logic:Hvis <sann> - så||`` og sette den inn i ``||basic:gjenta for alltid||``.
@@ -288,7 +293,7 @@ basic.forever(function () {
     }
 })
 ```
-### Steg 24
+### Steg 2
 
 Hent en rund ``||variables:Arm||`` fra ``||variables:variabler||`` og plasser den inn der det står "sann" i ``||logic:Hvis <sann> - så||`` blokken du satte inn i ``||basic:gjenta for alltid||``.
 
@@ -301,7 +306,7 @@ basic.forever(function () {
 })
 ```
 
-### Steg 25
+### Steg 3
 
 Hent blokken ``||led:tenn x <0> y <0>||`` fra kategorien ``||led:skjerm||`` og plasser den i ``||logic:Hvis <sann> - så||``.
 
@@ -315,7 +320,7 @@ basic.forever(function () {
 })
 ```
 
-### Steg 26
+### Steg 4
 
 Hent blokken ``||basic:tøm skjerm||`` og plasser den under ``||variables:sett Roll til||`` i ``||basic:gjenta for alltid||``
 ```blocks
@@ -328,7 +333,7 @@ basic.forever(function () {
     }
 })
 ```
-### Steg 27
+### Steg 5
 
 Hent en ny ``||led:tenn x <0> y <0>||`` og plasser den nederst i ``||basic:gjenta for alltid||``. 
 For å vise Throttle på skjermen må vi bruke en spesiell blokk fra matematikk som heter "regn om". 
@@ -345,7 +350,7 @@ basic.forever(function () {
 })
 ```
 
-### Steg 28
+### Steg 6
 
 Hent en rund ``||variables:Throttle||`` blokk og plasser den først i "regn om" blokken slik at det står ``||led:tenn x (0) y (regn om ||`` ``||variables:Throttle||`` ``||led:fra lav <0> fra høy <1023> til lav <0> til høy<4>)||``
 Endre tallene i "regn om" blokken slik at det står ``||led:tenn x (0) y (regn om ||`` ``||variables:Throttle||`` ``||led:fra lav <0> fra høy <100> til lav <4> til høy<0>)||``
@@ -361,7 +366,7 @@ basic.forever(function () {
 })
 ```
 
-### Steg 29
+### Steg 7
 
 Hent en ny ``||led:tenn x <0> y <0>||`` og plasser den nederst i ``||basic:gjenta for alltid||``. 
 ```blocks
@@ -377,7 +382,7 @@ basic.forever(function () {
 })
 ```
 
-### Steg 30
+### Steg 8
 
 Hent inn ``||math:regn om <0> fra lav <0> til høy <1023> til lav <0> til høy <4>||`` og plasser den i ``||led:tenn x <0> y <0>||`` slik at det står: ``||led:tenn x <regn om..> y<0>||`` 
 ```blocks
@@ -393,7 +398,7 @@ basic.forever(function () {
 })
 ```
 
-### Steg 31
+### Steg 9
 
 Hent en rund ``||variables:Roll||`` blokk og plasser den først i "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||`` ``||led:fra lav <0> fra høy <1023> til lav <0> til høy<4>) y(0)||``
 Endre tallene i "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||`` ``||led:fra lav <-45> fra høy <45> til lav <0> til høy<0>) y(0)||``
@@ -409,7 +414,7 @@ basic.forever(function () {
     led.plot(Math.map(Roll,-45,45,0,4),0)
     })
 ```
-### Steg 32
+### Steg 10
 
 Hent inn ``||math:regn om <0> fra lav <0> til høy <1023> til lav <0> til høy <4>||`` og plasser den i ``||led:tenn x <0> y <0>||`` slik at det står: ``||led:tenn x <regn om Roll ..> y<regn om ..>||`` 
 ```blocks
@@ -425,7 +430,7 @@ basic.forever(function () {
     })
 ```
 
-### Steg 33
+### Steg 11
 Hent en rund ``||variables:Pitch||`` blokk og plasser den først i den siste "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||`` ``||led:fra lav <0> fra høy <1023> til lav <0> til høy<4>) y(regn om ||`` ``||variables:Pitch||`` ``||led:fra lav <0> fra høy <1023> til lav <0> til høy<4>)||``
 Endre tallene i "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||``  ``||led:.. ) y(regn om||`` ``||variables:Pitch||`` ``||led:fra lav <-45> fra høy <45> til lav <0> til høy<4>))||``
 ```blocks
@@ -440,8 +445,19 @@ basic.forever(function () {
     led.plot(Math.map(Roll,-45,45,0,4),Math.map(Pitch,-45,45,0,4))
     })
 ```
+## Sende signaler
 
-### Steg 34
+### Sende signaler @unplugged
+Vi skal nå programmere fjernkontrollen til å sende kommandoer til dronen.  
+__"P"__ for __Pitch__  
+__"A"__ for __Arm__  
+__"R"__ for __Roll__  
+__"T"__ for __Throttle__ 
+
+Først må vi bestemme en "Radiogruppe" som fungerer som en radiokanal som dronen og fjernkontrollen skal snakke på.  
+Radiogruppe kan være et tall mellom 0 og 255. Pass på at dere velger et tall ingen av de andre gruppene har!
+
+### Steg 1
 
 Lag en ny ``||variables:variabel||`` som du kaller Radiogruppe.
 Bli enige om et tall som er deres Radiogruppe - det kan være mellom 0 og 255. 
@@ -452,7 +468,7 @@ let Throttle = 0
 let Radiogruppe = 42
 ```
 
-### Steg 35
+### Steg 2
 
 Legg inn en visning av radiokanal. Hent inn blokken ``||basic:vis tall||`` og plasser den under ``||variables:sett Radiogruppe til||``. Hent inn en rund ``||variables:Radiogruppe||`` og plasser den  ``||basic:vis tall||``. 
 ```blocks
@@ -461,23 +477,22 @@ let Radiogruppe = 42
 basic.showNumber(Radiogruppe)
 ```
 
-### Steg 36
+### Steg 3
 
 Hent inn blokken ``||radio:radio sett gruppe||`` og plasser den nederst i ``||basic:ved start||``. 
 Hent inn en rund ``||variables:Radiogruppe||`` og sett den i ``||radio:radio sett gruppe||``.
 ```blocks
-let Throttle = 0
 let Radiogruppe = 42
 basic.showNumber(Radiogruppe)
 radio.setGroup(Radiogruppe)
 ```
 
-### Steg 37
+### Steg 4
 
 Vi skal nå sende verdiene til dronen:
 Hent inn blokken ``||radio:radio send verdi||`` og plasser den nederst i ``||basic:gjenta for alltid||``
 Endre blokken ``||radio:radio send verdi||`` slik at det etter verdi står "P".
-Hent inn en rund ```||variables:Pitch||`` og sett den inn i ``||radio:radio send verdi||`` slik at blokken blir ``||radio:radio send verdi "P" =||`` ``||variables:Pitch||``
+Hent inn en rund ``||variables:Pitch||`` og sett den inn i ``||radio:radio send verdi||`` slik at blokken blir ``||radio:radio send verdi "P" =||`` ``||variables:Pitch||``
 
 ```blocks
 basic.forever(function () {
@@ -493,7 +508,7 @@ basic.forever(function () {
     })
 ```
 
-### Steg 38
+### Steg 5
 
 Vi skal nå gjøre det samme for Arm, Roll og Throttle.
 Hent inn en ``||radio:radio send verdi||`` som du setter til "A" = Arm, en som du setter til "R" = Roll og en som du setter til "T" = Throttle.
