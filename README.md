@@ -1,14 +1,9 @@
 
 > Åpne denne siden på [https://olauk.github.io/airbit-tutorial/](https://olauk.github.io/airbit-tutorial/)
 
-## Bruk som utvidelse
+## Tutorials
 
-Dette kodeområdet kan bli lagt til som en **utvidelse** i MakeCode.
-
-* åpne [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* klikk på **Nytt prosjekt**
-* klikk på **Utvidelser** i menyen under tannhjulet
-* søk etter **https://github.com/olauk/airbit-tutorial** og importér
+* [tutorial](/tutorial)
 
 ## Rediger dette prosjektet ![Bygg statusmerke](https://github.com/olauk/airbit-tutorial/workflows/MakeCode/badge.svg)
 
