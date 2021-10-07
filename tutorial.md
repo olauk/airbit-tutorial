@@ -393,7 +393,7 @@ basic.forever(function () {
 
 ## Steg 33
 Hent en rund ``||variables:Pitch||`` blokk og plasser den først i den siste "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||`` ``||led:fra lav <0> fra høy <1023> til lav <0> til høy<4>) y(regn om ||`` ``||variables:Pitch||`` ``||led:fra lav <0> fra høy <1023> til lav <0> til høy<4>)||``
-Endre tallene i "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||`` ``||led:.. ) y(regn om ``||variables:Pitch||`` ``||led:fra lav <-45> fra høy <45> til lav <0> til høy<4>))||``
+Endre tallene i "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||``  ``||led:.. ) y(regn om||`` ``||variables:Pitch||`` ``||led:fra lav <-45> fra høy <45> til lav <0> til høy<4>))||``
 ```blocks
 basic.forever(function () {
     Pitch = input.rotation(Rotation.Pitch)
@@ -404,5 +404,79 @@ basic.forever(function () {
     }
     led.plot(0, Math.map(Throttle, 0, 100, 4, 0))
     led.plot(Math.map(Roll,-45,45,0,4),Math.map(Pitch,-45,45,0,4))
+    })
+```
+
+## Steg 34
+
+Lag en ny ``||variables:variabel||`` som du kaller Radiogruppe.
+Bli enige om et tall som er deres Radiogruppe - det kan være mellom 0 og 255. 
+Hent inn ``||variables:sett Radiogruppe til||`` i ``||basic:ved start||`` og sett Radiogruppe til det tallet dere har valgt.
+
+```blocks
+let Throttle = 0
+let Radiogruppe = 42
+```
+
+## Steg 35
+
+Legg inn en visning av radiokanal. Hent inn blokken ``||basic:vis tall||`` og plasser den under ``||variables:sett Radiogruppe til||``. Hent inn en rund ``||variables:Radiogruppe||`` og plasser den  ``||basic:vis tall||``. 
+```blocks
+let Throttle = 0
+let Radiogruppe = 42
+basic.showNumber(Radiogruppe)
+```
+
+## Steg 36
+
+Hent inn blokken ``||radio:radio sett gruppe||`` og plasser den nederst i ``||basic:ved start||``. 
+Hent inn en rund ``||variables:Radiogruppe||`` og sett den i ``||radio:radio sett gruppe||``.
+```blocks
+let Throttle = 0
+let Radiogruppe = 42
+basic.showNumber(Radiogruppe)
+radio.setGroup(Radiogruppe)
+```
+
+## Steg 37
+
+Vi skal nå sende verdiene til dronen:
+Hent inn blokken ``||radio:radio send verdi||`` og plasser den nederst i ``||basic:gjenta for alltid||``
+Endre blokken ``||radio:radio send verdi||`` slik at det etter verdi står "P".
+Hent inn en rund ```||variables:Pitch||`` og sett den inn i ``||radio:radio send verdi||`` slik at blokken blir ``||radio:radio send verdi "P" =||`` ``||variables:Pitch||``
+
+```blocks
+basic.forever(function () {
+    Pitch = input.rotation(Rotation.Pitch)
+    Roll = input.rotation(Rotation.Roll)
+    basic.clearScreen()
+    if (Arm) {
+        led.plot(0, 0)
+    }
+    led.plot(0, Math.map(Throttle, 0, 100, 4, 0))
+    led.plot(Math.map(Roll,-45,45,0,4),Math.map(Pitch,-45,45,0,4))
+    radio.sendValue("P", Pitch)
+    })
+```
+
+## Steg 38
+
+Vi skal nå gjøre det samme for Arm, Roll og Throttle.
+Hent inn en ``||radio:radio send verdi||`` som du setter til "A" = Arm, en som du setter til "R" = Roll og en som du setter til "T" = Throttle.
+Husk at det er viktig å bruke stor bokstav!
+```blocks
+basic.forever(function () {
+    Pitch = input.rotation(Rotation.Pitch)
+    Roll = input.rotation(Rotation.Roll)
+    basic.clearScreen()
+    if (Arm) {
+        led.plot(0, 0)
+    }
+    led.plot(0, Math.map(Throttle, 0, 100, 4, 0))
+    led.plot(Math.map(Roll,-45,45,0,4),Math.map(Pitch,-45,45,0,4))
+    radio.sendValue("P", Pitch)
+    radio.sendValue("A", Arm)
+    radio.sendValue("R", Roll)
+    radio.sendValue("T", Throttle)
     })
 ```
