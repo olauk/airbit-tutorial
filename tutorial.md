@@ -106,6 +106,7 @@ input.onButtonPressed(Button.B, function () {
 ## Steg 12
 
 Flytt blokken ``||variables:endre Throttle med 5||`` til den første åpningen i blokken ``||logic:Hvis <sann> så - ellers||`` 
+TIPS: Hold inne CTRL tasten for å flytte en blokk midt i koden.
 ```blocks
 input.onButtonPressed(Button.B, function () {
     if (Throttle < 40) {
@@ -174,11 +175,11 @@ input.onButtonPressed(Button.AB, function () {
 
 ## Steg 17
 
-Lag en ny variabel som du kaller "Arm"
+Lag en ny ``||variables:variabel||`` som du kaller "Arm"
 
 ## Steg 18
 
-Hent blokken ``||logic:Hvis <sann> - så ellers||`` fra ``||logikk||`` og plasser den i ``||input:Når knapp A+B trykkes||``
+Hent blokken ``||logic:Hvis <sann> - så ellers||`` fra ``||logic:logikk||`` og plasser den i ``||input:Når knapp A+B trykkes||``
 ```blocks
 input.onButtonPressed(Button.AB, function () {
 	if (true) {
@@ -216,7 +217,7 @@ input.onButtonPressed(Button.AB, function () {
 
 ## Steg 21
 
-Når vi trykke A + B vil vi også at Throttle skal settes til 0. Hent derfor inn ``||variables:sett Throttle til||`` og plasser den under ``||logic:Hvis <sann> - så ellers||`` i ``||input:Når knapp A+B trykkes||``
+Når vi trykker A + B vil vi også at Throttle skal settes til 0. Hent derfor inn ``||variables:sett Throttle til||`` og plasser den under ``||logic:Hvis <sann> - så ellers||`` i ``||input:Når knapp A+B trykkes||``
 ```blocks
 input.onButtonPressed(Button.AB, function () {
 	if (Arm) {
@@ -227,3 +228,122 @@ input.onButtonPressed(Button.AB, function () {
     Throttle = 0
 })
 ```
+
+## Steg 22
+
+For å lage en nødstopp skal vi bruke blokken ``||input:Når ristes||`` fra ``||input:inndata||``
+I den skal vi legge ``||variables:sett Arm til||`` og ``||variables:sett Throttle til||``. Begge disse settes til 0.
+
+```blocks
+input.onGesture(Gesture.Shake, function () {
+    Arm = 0
+    Throttle = 0
+})
+```
+
+## Steg 23
+
+For å vise om dronen er på eller av skal vi bruker skjermen. Først må vi undersøke om Arm = 1 (drone på) eller om Arm = 0 (drone av).
+Vi skal da hente blokken ``||logic:Hvis <sann> - så||`` og sette den inn i ``||basic:gjenta for alltid||``.
+
+```blocks
+basic.forever(function () {
+    Pitch = input.rotation(Rotation.Pitch)
+    Roll = input.rotation(Rotation.Roll)
+    if () {
+    }
+})
+```
+## Steg 24
+
+Hent en rund ``||variables:Arm||`` fra ``||variables:variabler||`` og plasser den inn der det står "sann" i ``||logic:Hvis <sann> - så||`` blokken du satte inn i ``||basic:gjenta for alltid||``.
+
+```blocks
+basic.forever(function () {
+    Pitch = input.rotation(Rotation.Pitch)
+    Roll = input.rotation(Rotation.Roll)
+    if (Arm) {
+    }
+})
+```
+
+## Steg 25
+
+Hent blokken ``||led:tenn x <0> y <0>||`` fra kategorien ``||led:skjerm||`` og plasser den i ``||logic:Hvis <sann> - så||``.
+
+```blocks
+basic.forever(function () {
+    Pitch = input.rotation(Rotation.Pitch)
+    Roll = input.rotation(Rotation.Roll)
+    if (Arm) {
+        led.plot(0, 0)
+    }
+})
+```
+
+## Steg 26
+
+Hent blokken ``||basic:tøm skjerm||`` og plasser den under ``||variables:sett Roll til||`` i ``||basic:gjenta for alltid||``
+
+## Steg 27
+
+Hent en ny ``||led:tenn x <0> y <0>||`` og plasser den nederst i ``||basic:gjenta for alltid||``. 
+For å vise Throttle på skjermen må vi bruke en spesiell blokk fra matematikk som heter "regn om". 
+Hent ``||math:regn om <0> fra lav <0> til høy <1023> til lav <0> til høy <4>||`` fra ``||math:matematikk||`` og plasser den i ``||led:tenn x <0> y<0>||`` slik at det står ``||led:tenn x (0) y (regn om...)||``
+```blocks
+basic.forever(function () {
+    Pitch = input.rotation(Rotation.Pitch)
+    Roll = input.rotation(Rotation.Roll)
+    if (Arm) {
+        led.plot(0, 0)
+    }
+    led.plot(0, Math.map(0,0,1023,0,4))
+})
+```
+
+## Steg 28
+
+Hent en rund ``||variables:Throttle||`` blokk og plasser den først i "regn om" blokken slik at det står ``||led:tenn x (0) y (regn om ||`` ``||variables:Throttle||`` ``||led:fra lav <0> fra høy <1023> til lav <0> til høy<4>)||``
+Endre tallene i "regn om" blokken slik at det står ``||led:tenn x (0) y (regn om ||`` ``||variables:Throttle||`` ``||led:fra lav <0> fra høy <100> til lav <4> til høy<0>)||``
+```blocks
+basic.forever(function () {
+    Pitch = input.rotation(Rotation.Pitch)
+    Roll = input.rotation(Rotation.Roll)
+    if (Arm) {
+        led.plot(0, 0)
+    }
+    led.plot(0, Math.map(Throttle, 0, 100, 4, 0))
+})
+```
+
+## Steg 29
+
+Hent en ny ``||led:tenn x <0> y <0>||`` og plasser den nederst i ``||basic:gjenta for alltid||``. 
+```blocks
+basic.forever(function () {
+    Pitch = input.rotation(Rotation.Pitch)
+    Roll = input.rotation(Rotation.Roll)
+    if (Arm) {
+        led.plot(0, 0)
+    }
+    led.plot(0, Math.map(Throttle, 0, 100, 4, 0))
+    led.plot(0,0)
+})
+```
+
+## Steg 30
+
+Hent inn ``||math:regn om <0> fra lav <0> til høy <1023> til lav <0> til høy <4>||`` og plasser den i ``||led:tenn x <0> y <0>||`` slik at det står: ``||led:tenn x <regn om..> y<0>||`` 
+```blocks
+basic.forever(function () {
+    Pitch = input.rotation(Rotation.Pitch)
+    Roll = input.rotation(Rotation.Roll)
+    if (Arm) {
+        led.plot(0, 0)
+    }
+    led.plot(0, Math.map(Throttle, 0, 100, 4, 0))
+    led.plot(Math.map(0,0,1023,0,4),0)
+})
+```
+
+## Steg 31
