@@ -459,8 +459,8 @@ Radiogruppe kan være et tall mellom 0 og 255. Pass på at dere velger et tall i
 
 ### Steg 1
 
-Lag en ny ``||variables:variabel||`` som du kaller Radiogruppe.
-Bli enige om et tall som er deres Radiogruppe - det kan være mellom 0 og 255. 
+Lag en ny ``||variables:variabel||`` som du kaller Radiogruppe.  
+Bli enige om et tall som er deres Radiogruppe - det kan være mellom 0 og 255.   
 Hent inn ``||variables:sett Radiogruppe til||`` i ``||basic:ved start||`` og sett Radiogruppe til det tallet dere har valgt.
 
 ```blocks
@@ -470,7 +470,8 @@ let Radiogruppe = 42
 
 ### Steg 2
 
-Legg inn en visning av radiokanal. Hent inn blokken ``||basic:vis tall||`` og plasser den under ``||variables:sett Radiogruppe til||``. Hent inn en rund ``||variables:Radiogruppe||`` og plasser den  ``||basic:vis tall||``. 
+Legg inn en visning av radiokanal. Hent inn blokken ``||basic:vis tall||`` og plasser den under ``||variables:sett Radiogruppe til||``.   
+Hent inn en rund ``||variables:Radiogruppe||`` og plasser den  ``||basic:vis tall||``. 
 ```blocks
 let Throttle = 0
 let Radiogruppe = 42
@@ -479,7 +480,7 @@ basic.showNumber(Radiogruppe)
 
 ### Steg 3
 
-Hent inn blokken ``||radio:radio sett gruppe||`` og plasser den nederst i ``||basic:ved start||``. 
+Hent inn blokken ``||radio:radio sett gruppe||`` og plasser den nederst i ``||basic:ved start||``.   
 Hent inn en rund ``||variables:Radiogruppe||`` og sett den i ``||radio:radio sett gruppe||``.
 ```blocks
 let Radiogruppe = 42
@@ -489,9 +490,9 @@ radio.setGroup(Radiogruppe)
 
 ### Steg 4
 
-Vi skal nå sende verdiene til dronen:
-Hent inn blokken ``||radio:radio send verdi||`` og plasser den nederst i ``||basic:gjenta for alltid||``
-Endre blokken ``||radio:radio send verdi||`` slik at det etter verdi står "P".
+Vi skal nå sende verdiene til dronen:  
+Hent inn blokken ``||radio:radio send verdi||`` og plasser den nederst i ``||basic:gjenta for alltid||``  
+Endre blokken ``||radio:radio send verdi||`` slik at det etter verdi står "P".  
 Hent inn en rund ``||variables:Pitch||`` og sett den inn i ``||radio:radio send verdi||`` slik at blokken blir ``||radio:radio send verdi "P" =||`` ``||variables:Pitch||``
 
 ```blocks
@@ -510,8 +511,10 @@ basic.forever(function () {
 
 ### Steg 5
 
-Vi skal nå gjøre det samme for Arm, Roll og Throttle.
-Hent inn en ``||radio:radio send verdi||`` som du setter til "A" = Arm, en som du setter til "R" = Roll og en som du setter til "T" = Throttle.
+Vi skal nå gjøre det samme for Arm, Roll og Throttle.  
+Hent inn en ``||radio:radio send verdi||`` som du setter til "A" = ``||variables:Arm||``     
+Hent inn en ``||radio:radio send verdi||`` som du setter til "R" = ``||variables:Roll||``    
+Hent inn en ``||radio:radio send verdi||`` som du setter til "T" = ``||variables:Throttle||``    
 Husk at det er viktig å bruke stor bokstav!
 ```blocks
 basic.forever(function () {
