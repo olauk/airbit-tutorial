@@ -4,6 +4,7 @@
 ## Tutorials
 
 * [tutorial](airbit-tutorial/tutorial)
+* https://makecode.microbit.org/#tutorial:github:olauk/airbit-tutorial/tutorial
 
 ## Rediger dette prosjektet ![Bygg statusmerke](https://github.com/olauk/airbit-tutorial/workflows/MakeCode/badge.svg)
 
