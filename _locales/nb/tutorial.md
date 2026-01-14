@@ -466,7 +466,6 @@ Bli enige om et tall som er deres Radiogruppe - det kan være mellom 0 og 255.
 Hent inn ``||variables:sett Radiogruppe til||`` i ``||basic:ved start||`` og sett Radiogruppe til det tallet dere har valgt.
 
 ```blocks
-let Throttle = 0
 let Radiogruppe = 42
 ```
 
@@ -475,7 +474,6 @@ let Radiogruppe = 42
 Legg inn en visning av radiokanal. Hent inn blokken ``||basic:vis tall||`` og plasser den under ``||variables:sett Radiogruppe til||``.   
 Hent inn en rund ``||variables:Radiogruppe||`` og plasser den  ``||basic:vis tall||``. 
 ```blocks
-let Throttle = 0
 let Radiogruppe = 42
 basic.showNumber(Radiogruppe)
 ```
