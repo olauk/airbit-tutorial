@@ -13,7 +13,8 @@ Vi skal bruke sensorene og knappene til micro:bit for å styre dronen.
 __Pitch__ - styrer om dronen kjører _fremover_ eller _bakover_  
 __Arm__ - _starter_ eller _stopper_ dronen  
 __Roll__ - styrer om dronen går om _høyre_ eller _venstre_  
-__Throttle__ - styrer om dronen går _opp_ eller _ned_  
+__Throttle__ - styrer om dronen går _opp_ eller _ned_
+__Yaw__ - roterer dronen til _høyre_ eller _venstre_ (Denne verdien beregner dronen selv)  
 
 ## Styring
 
@@ -401,7 +402,7 @@ basic.forever(function () {
 ### Steg 9
 
 Hent en rund ``||variables:Roll||`` blokk og plasser den først i "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||`` ``||led:fra lav <0> fra høy <1023> til lav <0> til høy<4>) y(0)||``
-Endre tallene i "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||`` ``||led:fra lav <-45> fra høy <45> til lav <0> til høy<0>) y(0)||``
+Endre tallene i "regn om" blokken slik at det står ``||led:tenn x (regn om ||`` ``||variables:Roll||`` ``||led:fra lav <-45> fra høy <45> til lav <0> til høy<4>) y(0)||``
 ```blocks
 basic.forever(function () {
     Pitch = input.rotation(Rotation.Pitch)
